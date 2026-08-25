@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga IntelliJ - AI Yoga Trainer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- MediaPipe and custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1635988162/pose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.js"></script>
+    <script src="script.js" defer></script>
+    <script src="pose_detection.js" defer></script></head>
+<body>
+    <header>
+        <h1>Yoga IntelliJ</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#poses">Yoga Poses</a></li>
+                <li><a href="#trainer">AI Trainer</a></li>
+                <li><a href="#chatbot">Health Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+          <h2>Master Yoga with <span class="ai-highlight">AI</span></h2>
+          <p>Real-time feedback to perfect your poses</p>
+          <button onclick="startPoseEstimation()">Start Training</button>
+        </div>
+      </section>
+
+    <section id="poses" class="poses-section">
+        <h2>Popular Yoga Poses</h2>
+        <div class="main-container">
+            <div class="poses-grid">
+                <div class="pose-card">
+                    <img src="images/mountain-pose.jpg" alt="Mountain Pose" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Mountain Pose</h3>
+                    <p>Foundation of all standing poses</p>
+                    <button class="try-pose-btn" data-pose="mountainPose">Try This Pose</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/warrior-pose.jpg" alt="Warrior Pose" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Warrior Pose</h3>
+                    <p>Builds strength and stability</p>
+                    <button class="try-pose-btn" data-pose="warriorPose">Try This Pose</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/tree-pose.jpg" alt="Tree Pose" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Tree Pose</h3>
+                    <p>Improves balance and focus</p>
+                    <button class="try-pose-btn" data-pose="treePose">Try This Pose</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/downward-dog.jpg" alt="Downward Dog" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Downward Dog</h3>
+                    <p>Strengthens arms and stretches back</p>
+                    <button class="try-pose-btn" data-pose="downwardDog">Try This Pose</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/child-pose.jpg" alt="Child's Pose" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Child's Pose</h3>
+                    <p>Gentle stretch for back and hips</p>
+                    <button class="try-pose-btn" data-pose="childPose">Try This Pose</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/cobra-pose.jpg" alt="Cobra Pose" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Cobra Pose</h3>
+                    <p>Opens chest and strengthens spine</p>
+                    <button class="try-pose-btn" data-pose="cobraPose">Try This Pose</button>
+                </div>
+            </div>
+        </div>
+        <h2>Yoga Mudras</h2>
+        <div class="main-container">
+            <div class="poses-grid">
+                <div class="pose-card">
+                    <img src="images/pranamudra.jpg" alt="Prana Mudra" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Prana Mudra</h3>
+                    <p>Gesture of Life</p>
+                    <button class="try-pose-btn" data-pose="pranaMudra">Try This Mudra</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/gyanmudra.jpg" alt="Gyan Mudra" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Gyan Mudra</h3>
+                    <p>Gesture of Knowledge</p>
+                    <button class="try-pose-btn" data-pose="gyanMudra">Try This Mudra</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/anjalimudra.jpg" alt="Anjali Mudra" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Anjali Mudra</h3>
+                    <p>Gesture of Salutation</p>
+                    <button class="try-pose-btn" data-pose="anjaliMudra">Try This Mudra</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/vayumudras.jpg" alt="Vayu Mudra" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Vayu Mudra</h3>
+                    <p>Gesture of Air</p>
+                    <button class="try-pose-btn" data-pose="vayuMudra">Try This Mudra</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/shunyamudra.jpg" alt="Shunya Mudra" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Shunya Mudra</h3>
+                    <p>Gesture of Emptiness</p>
+                    <button class="try-pose-btn" data-pose="shunyaMudra">Try This Mudra</button>
+                </div>
+                <div class="pose-card">
+                    <img src="images/dhyanamudra.jpg" alt="Dhyana Mudra" onerror="this.src='images/placeholder.jpg'">
+                    <h3>Dhyana Mudra</h3>
+                    <p>Meditation Gesture</p>
+                    <button class="try-pose-btn" data-pose="dhyanaMudra">Try This Mudra</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="trainer" class="trainer-section" style="padding:0;">
+        <div class="trainer-visual-container">
+            <div class="camera-area">
+                <div class="camera-frame">
+                    <video id="webcam" autoplay playsinline muted></video>
+                    <canvas id="outputCanvas"></canvas>
+                    <div class="stats-overlay">
+                        <span>Confidence: <span id="confidence-score">0%</span></span>
+                        <span>Detected Points: <span id="detected-points">0</span></span>
+                    </div>
+                </div>
+                <div class="camera-controls">
+                    <button class="start-btn">Start Camera</button>
+                    <button class="stop-btn">Stop Camera</button>
+                </div>
+            </div>
+            <div class="feedback-overlay" id="pose-feedback">
+                <h2>Instructions & Feedback</h2>
+                <div class="highlight-instructions">
+                    <ul>
+                        <li><strong>1.</strong> Stand in front of your camera.</li>
+                        <li><strong>2.</strong> Select a pose from the main page before starting.</li>
+                        <li><strong>3.</strong> Follow the on-screen feedback to improve your posture.</li>
+                    </ul>
+                </div>
+                <div class="dynamic-feedback" id="dynamic-feedback"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Chatbot Section -->
+    <section id="chatbot" class="chatbot-section">
+        <h2>AI Chat Assistant</h2>
+        <div class="chatbot-container">
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input-row">
+                <input type="text" id="user-input" placeholder="Ask me anything about yoga, fitness, or health...">
+                <button class="send-btn">Send</button>
+            </div>
+        </div>
+    </section>
+    <script src="chatbot.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Yoga IntelliJ</h3>
+                <p>AI-powered yoga training for everyone</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#poses">Poses</a></li>
+                    <li><a href="#trainer">Trainer</a></li>
+                    <li><a href="#chatbot">Health Chat</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: <a href="mailto:info@yogaintellij.com">info@yogaintellij.com</a></p>
+                <p>Phone: <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Yoga IntelliJ. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
